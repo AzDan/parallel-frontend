@@ -1,3 +1,8 @@
 .App {
-  margin-left: 20%;
+  margin-left: 24%;
+
+  & .right-content {
+    width: 94%;
+    padding-top: 24px;
+  }
 }
