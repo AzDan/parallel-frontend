@@ -1,6 +1,6 @@
 import './styles/sidenav.scss';
 
-function SideNav() {
+const SideNav = (props) => {
   return(
     <div className='side-nav'>
       <div className='side-nav__section'>
@@ -17,9 +17,9 @@ function SideNav() {
         <p>Datasource = https://resisted-aboard-koala.glitch.me/events</p>
       </div>
       <div className='side-nav__navigation'>
-        <a href="#" className='side-nav__navigation--link'>Problem 1</a>
-        <a href="#" className='side-nav__navigation--link selected'>Problem 2</a>
-        <a href="#" className='side-nav__navigation--link'>Problem 3</a>
+        <a href="#" className={'side-nav__navigation--link ' + (props.activeTab==1?'selected':'')} onClick={() => props.setActiveTab(1)}>Problem 1</a>
+        <a href="#" className={'side-nav__navigation--link ' + (props.activeTab==2?'selected':'')} onClick={() => props.setActiveTab(2)}>Problem 2</a>
+        <a href="#" className={'side-nav__navigation--link ' + (props.activeTab==3?'selected':'')} onClick={() => props.setActiveTab(3)}>Problem 3</a>
       </div>
     </div>
   );
