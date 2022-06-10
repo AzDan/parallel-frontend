@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import autocolors from 'chartjs-plugin-autocolors';
 Chart.register(autocolors);
@@ -49,52 +49,73 @@ const ChartContainer = (props) => {
 
   const renderBarChart = () => {
     const activeTab = props.activeTab;
+    const visualisationTab = props.visualisationTab;
 
-    if(activeTab == 1) {
-      return <Bar 
-        data={GraphDataForPageVisits}
-        options={{
-          scales: {
-            y: {
-              title: {
-                display: true,
-                text: 'No. of visits',
-                color: '#000'
+    if(activeTab === 1) {
+      if(visualisationTab===1) {
+        return <Bar 
+          data={GraphDataForPageVisits}
+          options={{
+            scales: {
+              y: {
+                title: {
+                  display: true,
+                  text: 'No. of visits',
+                  color: '#000'
+                }
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: 'Pages',
+                  color: '#000'
+                }
               }
             },
-            x: {
-              title: {
-                display: true,
-                text: 'Pages',
-                color: '#000'
+            plugins: {
+              autocolors: {
+                enabled: true,
+                mode: 'data'
               }
             }
-          },
-          plugins: {
-            autocolors: {
-              enabled: true,
-              mode: 'data'
-            }
-          }
-        }}
-      />
+          }}
+        />
+      }
+      else if(visualisationTab===2) {
+        return (
+        <div className='chart-container pie-chart'>
+          <Pie
+            data={GraphDataForPageVisits}
+            options={{
+              plugins: {
+                autocolors: {
+                  enabled: true,
+                  mode: 'data'
+                }
+              }
+            }}
+          />
+        </div>
+        )
+      }
     }
-    else if(activeTab == 2) {
-      return <Bar 
+    else if(activeTab === 2) {
+      if(visualisationTab===1) {
+        return <Bar 
         data={GraphDataForHourVisits}
         options={{
           scales: {
             y: {
               title: {
                 display: true,
-                text: 'Time duration of visit',
+                text: 'No. of users',
                 color: '#000'
               }
             },
             x: {
               title: {
                 display: true,
-                text: 'No. of users',
+                text: 'Time period of visit',
                 color: '#000'
               }
             }
@@ -107,9 +128,11 @@ const ChartContainer = (props) => {
           }
         }}
       />
+      }
     }
-    else if(activeTab == 3) {
-      return <Bar 
+    else if(activeTab === 3) {
+      if(visualisationTab===1) {
+        return <Bar 
         data={GraphDataForUserView}
         options={{
           scales: {
@@ -123,7 +146,7 @@ const ChartContainer = (props) => {
             x: {
               title: {
                 display: true,
-                text: 'Users',
+                text: 'User ID',
                 color: '#000'
               }
             }
@@ -136,11 +159,12 @@ const ChartContainer = (props) => {
           }
         }}
       />
+      }
     }
   }
 
   return (
-    <div>
+    <div className='chart-container'>
       {renderBarChart()}
     </div>
   )

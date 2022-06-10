@@ -25,14 +25,38 @@ const getHighestPageViews = (data) => {
 }
 
 const getHighestHoursView = (data) => {
-  let hoursView = {};
+  let hoursView = {
+    '9:00 - 9:15 am': 0,
+    '9:15 - 9:30 am': 0,
+    '9:30 - 9:45 am': 0,
+    '9:45 - 10:00 am': 0,
+    '10:00 - 10:15 am': 0,
+    '10:15 - 10:30 am': 0
+  };
   data.forEach((element) => {
     var hour = element.timestamp.substring(12,14);
-    if(hoursView[hour] === undefined) {
-      hoursView[hour] = 1;
+    var min = element.timestamp.substring(15,17);
+    if(hour === '09') {
+      if(min <= 15) {
+        hoursView['9:00 - 9:15 am']++;
+      }
+      else if(min <= 30) {
+        hoursView['9:15 - 9:30 am']++;
+      }
+      else if(min <= 45) {
+        hoursView['9:30 - 9:45 am']++;
+      }
+      else if(min < 60) {
+        hoursView['9:45 - 10:00 am']++;
+      }
     }
     else {
-      hoursView[hour]++;
+      if(min <= 15) {
+        hoursView['10:00 - 10:15 am']++;
+      }
+      else if(min <= 30) {
+        hoursView['10:15 - 10:30 am']++;
+      }
     }
   })
   resData.hourViewData = hoursView;

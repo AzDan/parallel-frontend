@@ -4,5 +4,14 @@
   & .right-content {
     width: 94%;
     padding-top: 24px;
+
+    & .chart-container {
+      width: 1024px;
+      margin: 40px auto;
+
+      &.pie-chart {
+        width: 470px;
+      }
+    }
   }
 }
